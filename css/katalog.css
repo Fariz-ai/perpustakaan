@@ -14,7 +14,7 @@ body {
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 40px auto;
   padding: 2rem;
   background-color: white;
@@ -29,19 +29,18 @@ h1 {
 
 p {
   color: #555;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
+/* Tombol Kembali */
 .back-button {
-  margin-top: 2rem;
   margin-bottom: 2rem;
-  text-align: left;
 }
 
 .btn-back {
   display: inline-block;
   padding: 0.6rem 1rem;
-  background-color: #f84343;
+  background-color: #00796b;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -49,7 +48,11 @@ p {
   transition: background-color 0.3s ease;
 }
 
-/* Search Bar */
+.btn-back:hover {
+  background-color: #004d40;
+}
+
+/* Search Form */
 .search-bar {
   display: flex;
   flex-wrap: wrap;
@@ -80,15 +83,23 @@ p {
 /* Card Layout */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.book-card-link {
+  text-decoration: none;
+  color: inherit;
 }
 
 .book-card {
-  background-color: #e0f7fa;
-  padding: 1rem;
-  border-radius: 8px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
   transition: transform 0.3s ease;
+  text-align: center;
 }
 
 .book-card:hover {
@@ -96,13 +107,16 @@ p {
 }
 
 .book-card h3 {
+  font-size: 1.2rem;
+  margin: 1rem 0 0.5rem;
   color: #00796b;
-  margin-bottom: 0.5rem;
 }
 
 .book-card p {
   margin: 0.3rem 0;
-  color: #333;
+  color: #555;
+  font-size: 0.95rem;
+  padding: 0 1rem 1rem;
 }
 
 .no-result {
@@ -140,8 +154,8 @@ p {
 
 /* Login CTA */
 .login-cta {
-  margin-top: 2rem;
   text-align: center;
+  margin-top: 2rem;
 }
 
 .btn-primary {

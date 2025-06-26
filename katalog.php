@@ -2,7 +2,7 @@
 require_once __DIR__ . '/core/autoload.php';
 
 // Pagination config
-$limit = 6;
+$limit = 8;
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $start = $page > 1 ? $page * $limit - $limit : 0;
 
@@ -55,7 +55,7 @@ while ($row = mysqli_fetch_assoc($kategori_result)) {
 
     <div class="container">
         <h1>Katalog Buku Perpustakaan</h1>
-        <p>Lihat dan cari buku-buku yang tersedia. Login diperlukan untuk meminjam.</p>
+        <p>Lihat dan cari buku-buku yang tersedia.</p>
 
         <div class="back-button">
             <a href="index.php" class="btn-back">← Kembali</a>
@@ -83,15 +83,15 @@ while ($row = mysqli_fetch_assoc($kategori_result)) {
             <div class="cards-container" id="bookResults">
                 <?php if ($result && mysqli_num_rows($result) > 0): ?>
                     <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                        <div class="book-card">
-                            <h3><?= htmlspecialchars($row['judul']) ?></h3>
-                            <p><strong>Pengarang:</strong> <?= htmlspecialchars($row['pengarang']) ?></p>
-                            <p><strong>Tahun:</strong> <?= htmlspecialchars($row['tahun']) ?></p>
-                            <p><strong>Penerbit:</strong> <?= htmlspecialchars($row['penerbit']) ?></p>
-                            <p><strong>Kategori:</strong>
-                                <?= $row['kategori'] ? htmlspecialchars($row['kategori']) : 'Tidak ada' ?>
-                            </p>
-                        </div>
+                        <a href="detailBuku.php?id=<?= $row['id'] ?>" class="book-card-link">
+                            <div class="book-card">
+                                <h3><?= htmlspecialchars($row['judul']) ?></h3>
+                                <p><strong>Pengarang:</strong> <?= htmlspecialchars($row['pengarang']) ?></p>
+                                <p><strong>Kategori:</strong>
+                                    <?= $row['kategori'] ? htmlspecialchars($row['kategori']) : 'Tidak ada' ?></p>
+                                <p><strong>Tahun:</strong> <?= htmlspecialchars($row['tahun']) ?></p>
+                            </div>
+                        </a>
                     <?php endwhile; ?>
                 <?php else: ?>
                     <p class="no-result">Tidak ada buku ditemukan.</p>

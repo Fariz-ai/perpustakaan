@@ -1,10 +1,12 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perpustakaan Digital | Beranda</title>
+  <title>Perpustakaan Digital</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/landing.css">
 </head>
@@ -15,6 +17,13 @@
       <div class="navbar-brand">📚 Perpustakaan Digital</div>
       <ul class="navbar-links">
         <li class="dropdown">
+          <a href="#">Rekomendasi</a>
+          <ul class="dropdown-content">
+            <li><a href="bukuBaru.php">Buku Baru</a></li>
+            <li><a href="#koleksi-umum">Koleksi Umum</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
           <a href="#">Profil</a>
           <ul class="dropdown-content">
             <li><a href="#tentang">Tentang Kami</a></li>
@@ -23,15 +32,16 @@
           </ul>
         </li>
         <li><a href="#faq">FAQ</a></li>
-        <li class="dropdown">
-          <a href="#">Rekomendasi</a>
-          <ul class="dropdown-content">
-            <li><a href="#buku-baru">Buku Baru</a></li>
-            <li><a href="#koleksi-umum">Koleksi Umum</a></li>
-          </ul>
-        </li>
-        <li><a href="member/login.php">Login Member</a></li>
-        <li><a href="admin/login.php">Login Admin</a></li>
+        <ul class="navbar-links">
+          <?php if (!isset($_SESSION['login_member']) && !isset($_SESSION['login_admin'])): ?>
+            <!-- Jika belum login -->
+            <li><a href="member/login.php">Login Member</a></li>
+            <li><a href="admin/login.php">Login Admin</a></li>
+          <?php else: ?>
+            <!-- Jika sudah login -->
+            <li><a href="logout.php">Logout</a></li>
+          <?php endif; ?>
+        </ul>
       </ul>
     </nav>
   </header>
