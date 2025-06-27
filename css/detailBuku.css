@@ -82,6 +82,22 @@ body {
   color: #004d40;
 }
 
+.sinopsis {
+  margin-top: 1rem;
+}
+
+.sinopsis h3 {
+  color: #00796b;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.sinopsis p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #555;
+}
+
 /* Tombol Pinjam */
 .btn-pinjam {
   display: inline-block;

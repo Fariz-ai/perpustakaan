@@ -22,7 +22,7 @@ $result = mysqli_query($connect, $query);
     <header class="page-header">
         <h1>Rekomendasi Buku Baru</h1>
         <p>Temukan koleksi buku terbaru dari berbagai genre.</p>
-        <a href="katalog.php" class="btn-back">← Kembali ke Katalog</a>
+        <a href="index.php" class="btn-back">← Kembali</a>
     </header>
 
     <!-- Cards Container -->

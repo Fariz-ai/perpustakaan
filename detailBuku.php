@@ -54,8 +54,11 @@ $buku = mysqli_fetch_assoc($result);
                 <p><strong>Tahun Terbit:</strong> <?= htmlspecialchars($buku['tahun']) ?></p>
                 <p><strong>Penerbit:</strong> <?= htmlspecialchars($buku['penerbit']) ?></p>
                 <p><strong>Kategori:</strong>
-                    <?= $buku['kategori'] ? htmlspecialchars($buku['kategori']) : 'Tidak ada' ?>
-                </p>
+                    <?= $buku['kategori'] ? htmlspecialchars($buku['kategori']) : 'Tidak ada' ?></p>
+                <div class="sinopsis">
+                    <h3>Sinopsis</h3>
+                    <p><?= htmlspecialchars($buku['sinopsis'] ?? 'Sinopsis belum tersedia.') ?></p>
+                </div>
             </div>
         </section>
 
