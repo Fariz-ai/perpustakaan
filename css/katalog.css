@@ -32,7 +32,6 @@ p {
   margin-bottom: 1rem;
 }
 
-/* Tombol Kembali */
 .back-button {
   margin-bottom: 2rem;
 }
@@ -150,25 +149,4 @@ p {
 .pagination a.active {
   background-color: #00796b;
   color: white;
-}
-
-/* Login CTA */
-.login-cta {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.btn-primary {
-  padding: 0.6rem 1.2rem;
-  background-color: #00796b;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  display: inline-block;
-  transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-  background-color: #004d40;
 }

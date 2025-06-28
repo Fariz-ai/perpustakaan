@@ -3,7 +3,7 @@ session_start();
 require_once __DIR__ . '/core/autoload.php';
 
 // Cek apakah user sudah login
-if (!isset($_SESSION['login_member'])) {
+if (!isset($_SESSION['login_member']) && !isset($_SESSION['login_admin'])) {
     $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
     header('Location: member/login.php');
     exit();
@@ -63,12 +63,34 @@ $buku = mysqli_fetch_assoc($result);
         </section>
 
         <div class="action-buttons">
-            <?php if (isset($_SESSION['login_member'])): ?>
-                <a href="pinjam.php?id=<?= $buku['id'] ?>" class="btn-pinjam">Pinjam Buku</a>
-            <?php else: ?>
-                <a href="../member/login.php" class="btn-pinjam">Pinjam Sekarang</a>
+            <!-- Jika yang login adalah Member -->
+            <?php if (isset($_SESSION['login_member']) && !isset($_SESSION['login_admin'])): ?>
+                <a href="pinjam.php?id=<?= $buku['id'] ?>"
+                    style="display: inline-block; padding: 0.8rem 1.5rem; background-color: #00796b; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-right: 1rem; transition: background-color 0.3s ease;">
+                    Pinjam Buku
+                </a>
+
+                <!-- Jika yang login adalah Admin -->
+            <?php elseif (isset($_SESSION['login_admin'])): ?>
+                <form action="admin/buku/edit.php" method="POST" style="display: inline;">
+                    <input type="hidden" name="id" value="<?= $buku['id'] ?>">
+                    <button type="submit"
+                        style="display: inline-block; padding: 0.8rem 1.5rem; background-color: #fbc02d; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-right: 1rem; transition: background-color 0.3s ease; cursor: pointer;">
+                        Edit Buku
+                    </button>
+                </form>
+
+                <form action="admin/buku/hapus.php" method="POST" style="display: inline;">
+                    <input type="hidden" name="id" value="<?= $buku['id'] ?>">
+                    <button type="submit"
+                        style="display: inline-block; padding: 0.8rem 1.5rem; background-color: #e53935; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-left: 0.5rem; transition: background-color 0.3s ease; cursor: pointer;"
+                        onclick="return confirm('Yakin ingin menghapus buku ini?')">
+                        Hapus Buku
+                    </button>
+                </form>
             <?php endif; ?>
         </div>
+
     </div>
 
 </body>

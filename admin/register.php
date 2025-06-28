@@ -1,12 +1,6 @@
+<?php session_start(); ?>
+
 <?php
-session_start();
-
-// Jika sudah login, arahkan ke halaman buku
-if (isset($_SESSION['login_member'])) {
-    header('Location: ../buku/index.php');
-    exit();
-}
-
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,14 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama = trim($_POST['nama']);
     $alamat = trim($_POST['alamat']);
 
-    // Validasi input
     if (empty($username) || empty($password) || empty($nama) || empty($alamat)) {
         $error = 'Semua field harus diisi.';
     } else {
         require_once __DIR__ . '/../core/autoload.php';
 
         // Cek apakah username sudah ada
-        $stmt = $connect->prepare('SELECT * FROM anggota WHERE username = ?');
+        $stmt = $connect->prepare('SELECT * FROM admin WHERE username = ?');
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -33,19 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Enkripsi password
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            // Simpan ke database
-            $stmt = $connect->prepare('INSERT INTO anggota (username, password, nama, alamat, status) VALUES (?, ?, ?, ?, 1)');
+            // Simpan ke tabel admin
+            $stmt = $connect->prepare('INSERT INTO admin (username, password, nama, alamat) VALUES (?, ?, ?, ?)');
             $stmt->bind_param('ssss', $username, $hashed_password, $nama, $alamat);
 
             if ($stmt->execute()) {
-                $_SESSION['login_member'] = true;
-                $_SESSION['id_anggota'] = $connect->insert_id;
-                $_SESSION['username'] = $username;
-                $_SESSION['nama'] = $nama;
-                $_SESSION['status'] = 1;
-                $_SESSION['alamat'] = $alamat;
+                // Login otomatis setelah daftar
+                $_SESSION['login_admin'] = true;
+                $_SESSION['admin_id'] = $connect->insert_id;
+                $_SESSION['admin_username'] = $username;
+                $_SESSION['admin_nama'] = $nama;
 
-                header('Location: ../buku/index.php');
+                header('Location: ../index.php');
                 exit();
             } else {
                 $error = 'Terjadi kesalahan saat mendaftar.';
@@ -61,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daftar Member Baru</title>
+    <title>Daftar Admin | Perpustakaan Digital</title>
     <link rel="stylesheet" href="../css/register.css" />
 </head>
 
@@ -69,10 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="register-container">
         <h2>Perpustakaan Digital</h2>
-        <h3>Daftar Anggota Baru</h3>
+        <h3>Daftar Admin Baru</h3>
 
         <?php if (!empty($error)): ?>
-        <p class="error"><?= htmlspecialchars($error) ?></p>
+            <p class="error"><?= htmlspecialchars($error) ?></p>
         <?php endif; ?>
 
         <form method="post" action="">

@@ -14,31 +14,26 @@
 <body>
   <header>
     <nav class="navbar">
-      <div class="navbar-brand">📚 Perpustakaan Digital</div>
+      <div class="navbar-brand"><a href="index.php">📚 Perpustakaan Digital</a></div>
       <ul class="navbar-links">
+        <li><a href="index.php">Home</a></li>
         <li class="dropdown">
-          <a href="#">Rekomendasi</a>
+          <a href="#">Buku</a>
           <ul class="dropdown-content">
             <li><a href="bukuBaru.php">Buku Baru</a></li>
-            <li><a href="#koleksi-umum">Koleksi Umum</a></li>
+            <li><a href="bukuSaya.php">Buku Saya</a></li>
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#">Profil</a>
-          <ul class="dropdown-content">
-            <li><a href="#tentang">Tentang Kami</a></li>
-            <li><a href="#visi">Visi & Misi</a></li>
-            <li><a href="#tim">Tim Kami</a></li>
-          </ul>
+          <a href="profil.php">Profil</a>
         </li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a href="faq.php">FAQ</a></li>
+
         <ul class="navbar-links">
           <?php if (!isset($_SESSION['login_member']) && !isset($_SESSION['login_admin'])): ?>
-            <!-- Jika belum login -->
             <li><a href="member/login.php">Login Member</a></li>
             <li><a href="admin/login.php">Login Admin</a></li>
           <?php else: ?>
-            <!-- Jika sudah login -->
             <li><a href="logout.php">Logout</a></li>
           <?php endif; ?>
         </ul>
@@ -50,7 +45,7 @@
     <section class="hero">
       <div class="hero-content">
         <div class="hero-image">
-          <img src="img/orang%20baca%20buku.jpg" alt="Orang Membaca Buku" />
+          <img src="img/orang-baca-buku.png" alt="Orang Membaca Buku" />
         </div>
         <div class="hero-text">
           <h1>Selamat Datang di Perpustakaan Digital</h1>
